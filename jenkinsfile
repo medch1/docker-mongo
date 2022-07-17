@@ -4,8 +4,7 @@ pipeline {
         stage ("Build") {
             steps {
                 echo 'Starting Build ...'
-
-            }
+                }
         }
         stage ("Test") {
             steps {
@@ -23,6 +22,6 @@ pipeline {
 
 
 
-checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/medch1/docker-mongo.git']]])
+//checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/medch1/docker-mongo.git']]])
 
-snykSecurity severity: 'critical', snykInstallation: 'Snyk', snykTokenId: 'snyk_cred'
+//snykSecurity severity: 'critical', snykInstallation: 'Snyk', snykTokenId: 'snyk_cred'
