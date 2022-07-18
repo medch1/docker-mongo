@@ -30,6 +30,11 @@ pipeline {
                 sh 'docker push medch1/simpleapp '
             }
         }
+        stage ("snyk test"){
+            steps  {
+                snykSecurity severity: 'critical', snykInstallation: 'Snyk', snykTokenId: 'snyk_cred'
+            }
+        }
     }
 }
 
