@@ -32,7 +32,7 @@ pipeline {
         }
         stage ("snyk test"){
             steps  {
-                snykSecurity severity: 'critical', snykInstallation: 'Snyk', snykTokenId: 'snyk_cred'
+                snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk_cred'
             }
         }
     }
