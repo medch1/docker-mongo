@@ -1,0 +1,26 @@
+node {
+    def app
+
+    stage('Clone repository') {
+        checkout scm
+    }
+
+    stage('Build image') {
+        sh 'echo "dev-0."${BUILD_NUMBER} > Online/htdocs/version'
+        app = docker.build("medch1/simpleapp", " .")
+    }
+
+    stage('Scan container') {
+
+        def variable = sh(script:'snyk container test medch1/simpleapp ', returnStatus: true)
+        echo "error code = ${variable}"
+       // if (variable != 0) {
+            //discordSend description: "Vulnerability alert for the " + env.JOB_NAME +"\n Build: " +env.BUILD_NUMBER +" ", footer: "", link: env.BUILD_URL, result: 'FAILURE', title: env.JOB_NAME, webhookURL: "https://discord.com/api/webhooks/984032308296319036/rHjlmZpvIuhEpdQz5KHb1LfK-VglR3LvT5PiGQC2EioiECMHDsMrMRGB6WVptwivNjxz"
+
+
+           // }
+
+    }
+
+
+}
