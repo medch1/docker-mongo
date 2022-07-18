@@ -32,7 +32,7 @@ pipeline {
         }
         stage ("snyk test"){
             steps  {
-                snykSecurity severity: 'critical', snykInstallation: 'snyk', snykTokenId: 'snyk_cred'
+                sh 'snyk container test medch1/simpleapp --file=Dockerfile'
             }
         }
     }
