@@ -11,7 +11,7 @@ node {
     }
 
     stage('Scan container') {
-
+        sh 'npm i -g snyk'
         def variable = sh(script:'snyk container test medch1/simpleapp ', returnStatus: true)
         echo "error code = ${variable}"
        // if (variable != 0) {
