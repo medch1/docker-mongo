@@ -1,12 +1,12 @@
 node {
     def app
 
-    /* stage('Clone repository') {
+     stage('Clone repository') {
         checkout scm
-    } */
+    }
 
     stage('Build image') {
-        sh 'echo "dev-0."${BUILD_NUMBER} > Online/htdocs/version'
+
         app = docker.build("medch1/simpleapp", " .")
     }
 
