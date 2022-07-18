@@ -10,7 +10,7 @@ node {
         app = docker.build("medch1/simpleapp", " .")
     }
 
-    stage('Download Latest Snyk CLI') {
+    /* stage('Download Latest Snyk CLI') {
             latest_version = sh(script: 'curl -Is "https://github.com/snyk/snyk/releases/latest" | grep "Location" | sed s#.*tag/##g', returnStdout: true)
             latest_version = latest_version.trim()
             echo "Latest Snyk CLI Version: ${latest_version}"
@@ -24,7 +24,7 @@ node {
                 ls -la
                 ./snyk -v
             """
-        }
+        } */
 
     stage('Scan container') {
        // snykSecurity snykInstallation: 'snyk', snykTokenId: 'snyk_cred'
