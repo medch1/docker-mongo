@@ -16,11 +16,13 @@ pipeline {
             }
         }
         stage('Snyk') {
-            steps {
-                withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
-                    sh 'snyk auth $SNYK_TOKEN'
+            dir('sources') {
+                steps {
+                    withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
+                        sh 'snyk auth $SNYK_TOKEN'
+                    }
+                    sh 'snyk test'
                 }
-                sh 'snyk test'
             }
         }
     }
