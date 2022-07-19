@@ -15,7 +15,7 @@ node {
     stage('Snyk') {
         script {
 
-            withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
+            withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
                 sh 'snyk auth $SNYK_TOKEN'
             }
             def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical', returnStatus: true)
