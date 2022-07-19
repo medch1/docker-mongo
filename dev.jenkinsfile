@@ -1,29 +1,29 @@
-pipeline {
-    agent any
+node {
+    def app
 
-    stages {
-        stage('Clone repository') {
-            steps {
-                checkout scm
+    stage('Clone repository') {
+        checkout scm
+    }
+
+    stage('Build image') {
+
+        app = docker.build("medch1/simpleapp", " .")
+    }
+
+
+
+    stage('Snyk') {
+        script {
+
+            withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
+                sh 'snyk auth $SNYK_TOKEN'
             }
-        }
-        stage('Build image') {
-            steps {
-                script {
-                    echo 'building image'
-                    app = docker.build("medch1/simpleapp", " .")
-                }
-            }
-        }
-        stage('Snyk') {
-            dir('sources') {
-                steps {
-                    withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
-                        sh 'snyk auth $SNYK_TOKEN'
-                    }
-                    sh 'snyk test'
-                }
-            }
+            def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical', returnStatus: true)
+
+            echo "error code = ${variable}"
+
         }
     }
+
+
 }
