@@ -1,8 +1,7 @@
 pipeline {
     agent any
-    def app
-    SNYK_TOKEN=credentials('snyk_cred')
-     stage('Clone repository') {
+
+    stage('Clone repository') {
         checkout scm
     }
 
@@ -14,17 +13,12 @@ pipeline {
 
 
     stage('Scan container') {
-       // snykSecurity snykInstallation: 'snyk', snykTokenId: 'snyk_cred'
-        //def variable = sh(script:'snyk container test medch1/simpleapp ', returnStatus: true)
-        //echo "error code = ${variable}"
-       // if (variable != 0) {
-            //discordSend description: "Vulnerability alert for the " + env.JOB_NAME +"\n Build: " +env.BUILD_NUMBER +" ", footer: "", link: env.BUILD_URL, result: 'FAILURE', title: env.JOB_NAME, webhookURL: "https://discord.com/api/webhooks/984032308296319036/rHjlmZpvIuhEpdQz5KHb1LfK-VglR3LvT5PiGQC2EioiECMHDsMrMRGB6WVptwivNjxz"
 
-        sh 'snyk auth ${SNYK_TOKEN}'
+        withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
+            sh 'snyk auth $SNYK_TOKEN'
+        }
         sh 'snyk test'
-           // }
 
     }
-
 
 }
