@@ -1,24 +1,24 @@
 pipeline {
     agent any
+
     stages {
         stage('Clone repository') {
-            checkout scm
-        }
-
-        stage('Build image') {
-
-            app = docker.build("medch1/simpleapp", " .")
-        }
-
-
-
-        stage('Scan container') {
-
-            withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
-                sh 'snyk auth $SNYK_TOKEN'
+            steps {
+                checkout scm
             }
-            sh 'snyk test'
-
+        }
+        stage('Build image') {
+            steps {
+                app = docker.build("medch1/simpleapp", " .")
+            }
+        }
+        stage('Snyk') {
+            steps {
+                withCredentials([string(credentialsId: 'snyk_secret_token', variable: 'SNYK_TOKEN')]) {
+                    sh 'snyk auth $SNYK_TOKEN'
+                }
+                sh 'snyk test'
+            }
         }
     }
 }
