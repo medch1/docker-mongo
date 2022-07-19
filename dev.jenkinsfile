@@ -9,8 +9,10 @@ pipeline {
         }
         stage('Build image') {
             steps {
-                echo 'building image'
-                app = docker.build("medch1/simpleapp", " .")
+                script {
+                    echo 'building image'
+                    app = docker.build("medch1/simpleapp", " .")
+                }
             }
         }
         stage('Snyk') {
