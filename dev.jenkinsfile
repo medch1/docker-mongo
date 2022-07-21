@@ -2,6 +2,9 @@ def app
 def gv
 pipeline {
     agent any
+    environment {
+            DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+        }
     stages {
         stage('Clone repository') {
             steps {
@@ -25,9 +28,21 @@ pipeline {
                 }
             }
         }
+        stage('Push image') {
+                    steps {
+                        script{
+                            gv.job('Push')
+				            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                            sh 'docker push medch1/simpleapp '
+                        }
+
+                    }
+                }
+
         stage('Snyk') {
             steps {
                 script{
+                    gv.job('Scan')
                     withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
                         sh 'snyk auth $SNYK_TOKEN'
                     }
