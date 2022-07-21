@@ -1,13 +1,27 @@
+
 node {
     def app
-
+    def gv
     stage('Clone repository') {
         checkout scm
     }
 
-    stage('Build image') {
+    stage('Init'){
+        steps {
+            script{
+                gv = load "script.groovy"
+            }
+        }
+    }
 
-        app = docker.build("medch1/simpleapp", " .")
+    stage('Build image') {
+        steps {
+            script {
+            gv.job('Build')
+            app = docker.build("medch1/simpleapp", " .")
+            }
+        }
+
     }
 
 
