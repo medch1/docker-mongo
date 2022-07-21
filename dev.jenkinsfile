@@ -39,11 +39,13 @@ pipeline {
             steps {
                 script{
                     if ($CONFIRMATION == 'yes') {
-                    gv.job('Push')
+
+
+                        gv.job('Push')
                         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         sh 'docker push medch1/simpleapp '
                     } else {
-                        echo " you choosed ${CONFIRMATION}"
+                        echo("you chose ${CONFIRMATION}")
                     }
                 }
 
