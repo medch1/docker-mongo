@@ -3,8 +3,8 @@ def gv
 pipeline {
     agent any
     environment {
-            DOCKERHUB_CREDENTIALS = credentials('docker_hub')
-        }
+        DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+    }
     stages {
         stage('Clone repository') {
             steps {
@@ -29,15 +29,26 @@ pipeline {
             }
         }
         stage('Push image') {
-                    steps {
-                        script{
-                            gv.job('Push')
-				            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                            sh 'docker push medch1/simpleapp '
-                        }
-
+            input {
+                message "Confirm pushing image ?"
+                ok "Done"
+                parameters {
+                    choice(name: 'CONFIRMATION',choices: ['yes','no'],description:'')
+                }
+            }
+            steps {
+                script{
+                    if $CONFIRMATION == 'yes' {
+                    gv.job('Push')
+                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        sh 'docker push medch1/simpleapp '
+                    } else {
+                        echo " you choosed ${CONFIRMATION}"
                     }
                 }
+
+            }
+        }
 
         stage('Snyk') {
             steps {
