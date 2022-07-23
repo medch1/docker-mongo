@@ -32,7 +32,7 @@ pipeline {
 
             steps {
                 script{
-                    env.CONFIRMATION = input message:"Confirm pushing image ?", ok "done", parameters:[choice(name: 'CONFIRMATION',choices: ['yes','no'],description:'')]
+                    env.CONFIRMATION = input message:"Confirm pushing image ?", ok: "done", parameters:[choice(name: 'CONFIRMATION',choices: ['yes','no'],description:'')]
 
                     echo "you chose ${CONFIRMATION}"
 
