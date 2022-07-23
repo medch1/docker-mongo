@@ -29,15 +29,10 @@ pipeline {
             }
         }
         stage('Push image') {
-            input {
-                message "Confirm pushing image ?"
-                ok "Done"
-                parameters {
-                    choice(name: 'CONFIRMATION',choices: ['yes','no'],description:'')
-                }
-            }
+
             steps {
                 script{
+                    env.CONFIRMATION = input message:"Confirm pushing image ?", ok "done", parameters:[choice(name: 'CONFIRMATION',choices: ['yes','no'],description:'')]
 
                     echo "you chose ${CONFIRMATION}"
 
