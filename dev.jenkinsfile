@@ -1,3 +1,4 @@
+@Library('jenkins-shared-library')
 def app
 def gv
 pipeline {
@@ -23,8 +24,9 @@ pipeline {
         stage('Build image') {
             steps {
                 script{
-                    gv.job('Build')
-                    app = docker.build("medch1/simpleapp", " .")
+                    buildImage()
+                    /* gv.job('Build')
+                    app = docker.build("medch1/simpleapp", " .") */
                 }
             }
         }
@@ -38,8 +40,9 @@ pipeline {
 
                     if(env.CONFIRMATION == 'yes') {
                         gv.job('Push')
-                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                        sh 'docker push medch1/simpleapp '
+                        pushImage()
+                        /* sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        sh 'docker push medch1/simpleapp ' */
                     } else {
                         echo "you chose ${CONFIRMATION}"
                     }
