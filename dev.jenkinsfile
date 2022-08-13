@@ -5,6 +5,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+        //using trigger to build pipeline
     }
     stages {
         stage('Clone repository') {
@@ -25,6 +26,7 @@ pipeline {
             steps {
                 script{
                     buildImage 'simpleapp'
+
                     /* gv.job('Build')
                     app = docker.build("medch1/simpleapp", " .") */
                 }
