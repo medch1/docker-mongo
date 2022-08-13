@@ -24,7 +24,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script{
-                    buildImage()
+                    buildImage 'simpleapp'
                     /* gv.job('Build')
                     app = docker.build("medch1/simpleapp", " .") */
                 }
@@ -39,8 +39,7 @@ pipeline {
 
 
                     if(env.CONFIRMATION == 'yes') {
-                        gv.job('Push')
-                        pushImage()
+                        pushImage 'simpleapp'
                         /* sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         sh 'docker push medch1/simpleapp ' */
                     } else {
