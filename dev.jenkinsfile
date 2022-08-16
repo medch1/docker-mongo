@@ -64,11 +64,14 @@ pipeline {
                     gv.job('Scan')
                     withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
                         sh 'snyk auth $SNYK_TOKEN'
+
                     }
                     def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical', returnStatus: true)
                     echo "error code = ${variable}"
                     if (variable != 0) {
                         discordSend description: "Vulnerability alert for the " + env.JOB_NAME +"\n Build: " +env.BUILD_NUMBER +" ", footer: "", link: env.BUILD_URL, result: 'FAILURE', title: env.JOB_NAME, webhookURL: "https://discord.com/api/webhooks/982963474802049054/DtXTfmbMIN4aj_jgDE1FryzOuBFmUkLyAYjGYKpgvSp074BSFHf1u42nNlmFZ10_BXXf"
+                        sh 'snyk code test --json > report.json'
+
                     }
                 }
             }
