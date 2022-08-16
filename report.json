@@ -1,0 +1,1365 @@
+{
+  "vulnerabilities": [
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H",
+      "creationTime": "2021-07-28T17:18:01.728109Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.1,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `apk-tools` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nlibfetch before 2021-07-26, as used in apk-tools, xbps, and other products, mishandles numeric strings for the FTP and HTTP protocols. The FTP passive mode implementation allows an out-of-bounds read because strtol is used to parse the relevant numbers into address bytes. It does not check if the line ends prematurely. If it does, the for-loop condition checks for the &#39;\\0&#39; terminator one byte too late.\n## Remediation\nUpgrade `Alpine:3.11` `apk-tools` to version 2.10.7-r0 or higher.\n## References\n- [MISC](https://github.com/freebsd/freebsd-src/commits/main/lib/libfetch)\n- [MISC](https://gitlab.alpinelinux.org/alpine/apk-tools/-/issues/10749)\n- [MLIST](https://lists.apache.org/thread.html/r61db8e7dcb56dc000a5387a88f7a473bacec5ee01b9ff3f55308aacc@%3Cdev.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r61db8e7dcb56dc000a5387a88f7a473bacec5ee01b9ff3f55308aacc@%3Cusers.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rbf4ce74b0d1fa9810dec50ba3ace0caeea677af7c27a97111c06ccb7@%3Cdev.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rbf4ce74b0d1fa9810dec50ba3ace0caeea677af7c27a97111c06ccb7@%3Cusers.kafka.apache.org%3E)\n",
+      "disclosureTime": "2021-08-03T14:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-APKTOOLS-1534687",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-36159"
+        ],
+        "CWE": [
+          "CWE-125"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:18:57.288940Z",
+      "nvdSeverity": "critical",
+      "packageName": "apk-tools",
+      "patches": [],
+      "publicationTime": "2021-07-27T14:06:38.323743Z",
+      "references": [
+        {
+          "title": "MISC",
+          "url": "https://github.com/freebsd/freebsd-src/commits/main/lib/libfetch"
+        },
+        {
+          "title": "MISC",
+          "url": "https://gitlab.alpinelinux.org/alpine/apk-tools/-/issues/10749"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r61db8e7dcb56dc000a5387a88f7a473bacec5ee01b9ff3f55308aacc@%3Cdev.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r61db8e7dcb56dc000a5387a88f7a473bacec5ee01b9ff3f55308aacc@%3Cusers.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rbf4ce74b0d1fa9810dec50ba3ace0caeea677af7c27a97111c06ccb7@%3Cdev.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rbf4ce74b0d1fa9810dec50ba3ace0caeea677af7c27a97111c06ccb7@%3Cusers.kafka.apache.org%3E"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<2.10.7-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Out-of-bounds Read",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H",
+          "cvssV3BaseScore": 9.1,
+          "severity": "critical",
+          "modificationTime": "2022-01-03T16:44:39.243547Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "apk-tools/apk-tools@2.10.5-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "apk-tools/apk-tools",
+      "version": "2.10.5-r0",
+      "nearestFixedInVersion": "2.10.7-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "openssl/libcrypto1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libcrypto1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "openssl/libssl1.1@1.1.1g-r0",
+        "openssl/libcrypto1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libcrypto1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "apk-tools/apk-tools@2.10.5-r0",
+        "openssl/libcrypto1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libcrypto1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "libtls-standalone/libtls-standalone@2.9.1-r0",
+        "openssl/libcrypto1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libcrypto1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "openssl/libssl1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libssl1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "apk-tools/apk-tools@2.10.5-r0",
+        "openssl/libssl1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libssl1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2021-08-25T05:14:49.792286Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `openssl` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nIn order to decrypt SM2 encrypted data an application is expected to call the API function EVP_PKEY_decrypt(). Typically an application will call this function twice. The first time, on entry, the &#34;out&#34; parameter can be NULL and, on exit, the &#34;outlen&#34; parameter is populated with the buffer size required to hold the decrypted plaintext. The application can then allocate a sufficiently sized buffer and call EVP_PKEY_decrypt() again, but this time passing a non-NULL value for the &#34;out&#34; parameter. A bug in the implementation of the SM2 decryption code means that the calculation of the buffer size required to hold the plaintext returned by the first call to EVP_PKEY_decrypt() can be smaller than the actual size required by the second call. This can lead to a buffer overflow when EVP_PKEY_decrypt() is called by the application a second time with a buffer that is too small. A malicious attacker who is able present SM2 content for decryption to an application could cause attacker chosen data to overflow the buffer by up to a maximum of 62 bytes altering the contents of other data held after the buffer, possibly changing application behaviour or causing the application to crash. The location of the buffer is application dependent but is typically heap allocated. Fixed in OpenSSL 1.1.1l (Affected 1.1.1-1.1.1k).\n## Remediation\nUpgrade `Alpine:3.11` `openssl` to version 1.1.1l-r0 or higher.\n## References\n- [CONFIRM](https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=59f5e75f3bced8fc0e130d72a3f582cf7b480b46)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210827-0010/)\n- [CONFIRM](https://www.openssl.org/news/secadv/20210824.txt)\n- [CONFIRM](https://www.tenable.com/security/tns-2021-16)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4963)\n- [MISC](https://www.oracle.com/security-alerts/cpuoct2021.html)\n- [MLIST](https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/08/26/2)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20211022-0003/)\n- [CONFIRM](https://www.tenable.com/security/tns-2022-02)\n- [MISC](https://www.oracle.com/security-alerts/cpujan2022.html)\n- [CONFIRM](https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf)\n- [MISC](https://www.oracle.com/security-alerts/cpuapr2022.html)\n",
+      "disclosureTime": "2021-08-24T15:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-OPENSSL-1569451",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3711"
+        ],
+        "CWE": [
+          "CWE-120"
+        ]
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-09T14:24:13.007332Z",
+      "nvdSeverity": "critical",
+      "packageName": "openssl",
+      "patches": [],
+      "publicationTime": "2021-08-25T05:11:05.591709Z",
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://git.openssl.org/gitweb/?p=openssl.git%3Ba=commitdiff%3Bh=59f5e75f3bced8fc0e130d72a3f582cf7b480b46"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210827-0010/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.openssl.org/news/secadv/20210824.txt"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2021-16"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4963"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r18995de860f0e63635f3008fd2a6aca82394249476d21691e7c59c9e@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rad5d9f83f0d11fb3f8bb148d179b8a9ad7c6a17f18d70e5805a713d1@%3Cdev.tomcat.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/08/26/2"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20211022-0003/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://www.tenable.com/security/tns-2022-02"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpujan2022.html"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://cert-portal.siemens.com/productcert/pdf/ssa-389290.pdf"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.oracle.com/security-alerts/cpuapr2022.html"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.1.1l-r0"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Buffer Overflow",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "SUSE",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-03T21:47:21.225218Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-06-16T10:54:06.390073Z"
+        },
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-05-11T01:11:08.136672Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "libtls-standalone/libtls-standalone@2.9.1-r0",
+        "openssl/libssl1.1@1.1.1g-r0"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "openssl/libssl1.1",
+      "version": "1.1.1g-r0",
+      "nearestFixedInVersion": "1.1.1l-r0"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2022-08-09T14:30:21.348518Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `zlib` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nzlib through 1.2.12 has a heap-based buffer over-read or buffer overflow in inflate in inflate.c via a large gzip header extra field. NOTE: only applications that call inflateGetHeader are affected. Some common applications bundle the affected zlib source code but may be unable to call inflateGetHeader (e.g., see the nodejs/node reference).\n## Remediation\nUpgrade `Alpine:3.11` `zlib` to version 1.2.11-r4 or higher.\n## References\n- [MISC](https://github.com/nodejs/node/blob/75b68c6e4db515f76df73af476eccf382bbcb00a/deps/zlib/inflate.c#L762-L764)\n- [MISC](https://github.com/ivd38/zlib_overflow)\n- [MISC](https://github.com/madler/zlib/commit/eff308af425b67093bab25f80f1ae950166bece1)\n- [MISC](https://github.com/madler/zlib/blob/21767c654d31d2dccdde4330529775c6c5fd5389/zlib.h#L1062-L1063)\n- [MLIST](http://www.openwall.com/lists/oss-security/2022/08/05/2)\n- [MISC](https://github.com/curl/curl/issues/9271)\n- [MLIST](http://www.openwall.com/lists/oss-security/2022/08/09/1)\n",
+      "disclosureTime": "2022-08-05T07:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-ZLIB-2977081",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2022-37434"
+        ],
+        "CWE": []
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-12T01:11:07.456458Z",
+      "nvdSeverity": "critical",
+      "packageName": "zlib",
+      "patches": [],
+      "publicationTime": "2022-08-06T14:21:13.389533Z",
+      "references": [
+        {
+          "title": "MISC",
+          "url": "https://github.com/nodejs/node/blob/75b68c6e4db515f76df73af476eccf382bbcb00a/deps/zlib/inflate.c%23L762-L764"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/ivd38/zlib_overflow"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/madler/zlib/commit/eff308af425b67093bab25f80f1ae950166bece1"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/madler/zlib/blob/21767c654d31d2dccdde4330529775c6c5fd5389/zlib.h%23L1062-L1063"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2022/08/05/2"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/curl/curl/issues/9271"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2022/08/09/1"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.2.11-r4"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Out-of-bounds Write",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-08-12T01:11:07.421352Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "cvssV3BaseScore": 6.5,
+          "severity": "medium",
+          "modificationTime": "2022-08-09T16:15:07.831555Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "zlib/zlib@1.2.11-r3"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "zlib/zlib",
+      "version": "1.2.11-r3",
+      "nearestFixedInVersion": "1.2.11-r4"
+    },
+    {
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "creationTime": "2022-08-09T14:30:21.348518Z",
+      "credit": [
+        ""
+      ],
+      "cvssScore": 9.8,
+      "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `zlib` package._\n_See `How to fix?` for `Alpine:3.11` relevant versions._\n\nzlib through 1.2.12 has a heap-based buffer over-read or buffer overflow in inflate in inflate.c via a large gzip header extra field. NOTE: only applications that call inflateGetHeader are affected. Some common applications bundle the affected zlib source code but may be unable to call inflateGetHeader (e.g., see the nodejs/node reference).\n## Remediation\nUpgrade `Alpine:3.11` `zlib` to version 1.2.11-r4 or higher.\n## References\n- [MISC](https://github.com/nodejs/node/blob/75b68c6e4db515f76df73af476eccf382bbcb00a/deps/zlib/inflate.c#L762-L764)\n- [MISC](https://github.com/ivd38/zlib_overflow)\n- [MISC](https://github.com/madler/zlib/commit/eff308af425b67093bab25f80f1ae950166bece1)\n- [MISC](https://github.com/madler/zlib/blob/21767c654d31d2dccdde4330529775c6c5fd5389/zlib.h#L1062-L1063)\n- [MLIST](http://www.openwall.com/lists/oss-security/2022/08/05/2)\n- [MISC](https://github.com/curl/curl/issues/9271)\n- [MLIST](http://www.openwall.com/lists/oss-security/2022/08/09/1)\n",
+      "disclosureTime": "2022-08-05T07:15:00Z",
+      "exploit": "Not Defined",
+      "id": "SNYK-ALPINE311-ZLIB-2977081",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2022-37434"
+        ],
+        "CWE": []
+      },
+      "malicious": false,
+      "modificationTime": "2022-08-12T01:11:07.456458Z",
+      "nvdSeverity": "critical",
+      "packageName": "zlib",
+      "patches": [],
+      "publicationTime": "2022-08-06T14:21:13.389533Z",
+      "references": [
+        {
+          "title": "MISC",
+          "url": "https://github.com/nodejs/node/blob/75b68c6e4db515f76df73af476eccf382bbcb00a/deps/zlib/inflate.c%23L762-L764"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/ivd38/zlib_overflow"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/madler/zlib/commit/eff308af425b67093bab25f80f1ae950166bece1"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/madler/zlib/blob/21767c654d31d2dccdde4330529775c6c5fd5389/zlib.h%23L1062-L1063"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2022/08/05/2"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/curl/curl/issues/9271"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2022/08/09/1"
+        }
+      ],
+      "relativeImportance": null,
+      "semver": {
+        "vulnerable": [
+          "<1.2.11-r4"
+        ]
+      },
+      "severity": "critical",
+      "socialTrendAlert": false,
+      "title": "Out-of-bounds Write",
+      "packageManager": "alpine:3.11",
+      "language": "linux",
+      "insights": {
+        "triageAdvice": null
+      },
+      "cvssDetails": [
+        {
+          "assigner": "NVD",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "cvssV3BaseScore": 9.8,
+          "severity": "critical",
+          "modificationTime": "2022-08-12T01:11:07.421352Z"
+        },
+        {
+          "assigner": "RHEL",
+          "cvssV3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "cvssV3BaseScore": 6.5,
+          "severity": "medium",
+          "modificationTime": "2022-08-09T16:15:07.831555Z"
+        }
+      ],
+      "severityWithCritical": "critical",
+      "from": [
+        "docker-image|registry.hub.docker.com/medch1/simpleapp@latest",
+        "apk-tools/apk-tools@2.10.5-r0",
+        "zlib/zlib@1.2.11-r3"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "zlib/zlib",
+      "version": "1.2.11-r3",
+      "nearestFixedInVersion": "1.2.11-r4"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 16,
+  "org": "medch1",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.25.0\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "apk",
+  "ignoreSettings": {
+    "adminOnly": false,
+    "reasonRequired": false,
+    "disregardFilesystemIgnores": false
+  },
+  "docker": {
+    "baseImage": "node:13-alpine",
+    "baseImageRemediation": {
+      "code": "REMEDIATION_AVAILABLE",
+      "advice": [
+        {
+          "message": "Base Image      Vulnerabilities  Severity\nnode:13-alpine  41               3 critical, 20 high, 16 medium, 2 low\n"
+        },
+        {
+          "message": "Recommendations for base image upgrade:\n",
+          "bold": true
+        },
+        {
+          "message": "Major upgrades",
+          "bold": true
+        },
+        {
+          "message": "Base Image           Vulnerabilities  Severity\nnode:14.20.0-alpine  0                0 critical, 0 high, 0 medium, 0 low\n"
+        },
+        {
+          "message": "Alternative image types",
+          "bold": true
+        },
+        {
+          "message": "Base Image                  Vulnerabilities  Severity\nnode:16-bullseye-slim       46               1 critical, 2 high, 0 medium, 43 low\nnode:current-bullseye-slim  46               1 critical, 2 high, 0 medium, 43 low\nnode:current-buster-slim    72               1 critical, 2 high, 0 medium, 69 low\n"
+        },
+        {
+          "message": "Alpine 3.11.6 is no longer supported by the Alpine maintainers. Vulnerability detection may be affected by a lack of security updates.",
+          "bold": true,
+          "color": "yellow"
+        }
+      ]
+    },
+    "binariesVulns": {
+      "issuesData": {},
+      "affectedPkgs": {}
+    }
+  },
+  "summary": "10 critical severity vulnerable dependency paths",
+  "severityThreshold": "critical",
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 3,
+  "projectName": "docker-image|registry.hub.docker.com/medch1/simpleapp",
+  "platform": "linux/amd64",
+  "path": "registry.hub.docker.com/medch1/simpleapp/medch1/simpleapp"
+}
