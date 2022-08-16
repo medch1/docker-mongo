@@ -5,6 +5,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+        GITHUB_CREDENTIALS = credentials('gitHub')
         //using trigger to build pipeline
     }
     stages {
@@ -69,6 +70,33 @@ pipeline {
                     if (variable != 0) {
                         discordSend description: "Vulnerability alert for the " + env.JOB_NAME +"\n Build: " +env.BUILD_NUMBER +" ", footer: "", link: env.BUILD_URL, result: 'FAILURE', title: env.JOB_NAME, webhookURL: "https://discord.com/api/webhooks/982963474802049054/DtXTfmbMIN4aj_jgDE1FryzOuBFmUkLyAYjGYKpgvSp074BSFHf1u42nNlmFZ10_BXXf"
                     }
+                }
+            }
+        }
+
+        stage('commit update'){
+            steps{
+                script{
+
+
+                     withCredentials([string(credentialsId: 'github-token', variable: 'github-token')]) {
+                                sh 'git config --global user.email "jenkins@example.com" '
+                                sh 'git config --global user.name "jenkins" '
+
+
+                                sh 'git status'
+                                sh 'git branch'
+
+
+
+                                sh "git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/medch1/docker-mongo.git "
+
+
+                                sh 'git add .'
+                                sh 'git commit -m "ci:version bump" '
+                                sh 'git push origin master'
+                                }
+
                 }
             }
         }
