@@ -1337,7 +1337,7 @@
           "bold": true
         },
         {
-          "message": "Base Image                  Vulnerabilities  Severity\nnode:16-bullseye-slim       46               1 critical, 2 high, 0 medium, 43 low\nnode:current-bullseye-slim  46               1 critical, 2 high, 0 medium, 43 low\nnode:current-buster-slim    72               1 critical, 2 high, 0 medium, 69 low\n"
+          "message": "Base Image                  Vulnerabilities  Severity\nnode:16.16-bullseye-slim    46               1 critical, 2 high, 0 medium, 43 low\nnode:current-bullseye-slim  46               1 critical, 2 high, 0 medium, 43 low\nnode:current-buster-slim    72               1 critical, 2 high, 0 medium, 69 low\n"
         },
         {
           "message": "Alpine 3.11.6 is no longer supported by the Alpine maintainers. Vulnerability detection may be affected by a lack of security updates.",
