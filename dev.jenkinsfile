@@ -7,7 +7,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
         GITHUB_CREDENTIALS = credentials('github-token')
 
-        //using trigger to build pipeline
+        //using trigger to build pipeline.
     }
     stages {
         stage('Clone repository') {
