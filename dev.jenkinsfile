@@ -19,47 +19,44 @@ pipeline {
         }
         stage('Init') {
             steps {
-                script{
+                script {
                     gv = load "script.groovy"
 
-            }
-        }
-        stage('Build image') {
-            steps {
-                script{
-                    buildImage 'simpleapp'
-
-                     gv.job('Build')
-                    app = docker.build("medch1/simpleapp", " .")
                 }
             }
-        }
-        stage('Push image') {
+            stage('Build image') {
+                steps {
+                    script {
+                        buildImage 'simpleapp'
 
-            steps {
-                script{
-                    env.CONFIRMATION = input message:"Confirm pushing image ?", ok: "done", parameters:[choice(name: 'CONFIRMATION',choices: ['yes','no'],description:'')]
+                        gv.job('Build')
+                        app = docker.build("medch1/simpleapp", " .")
+                    }
+                }
+            }
+            stage('Push image') {
+
+                steps {
+                    script {
+                        env.CONFIRMATION = input message: "Confirm pushing image ?", ok: "done", parameters: [choice(name: 'CONFIRMATION', choices: ['yes', 'no'], description: '')]
 
 
-
-                    if(env.CONFIRMATION == 'yes') {
-                        dockerLogin()
-                        pushImage 'simpleapp'
-                        /* sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        if (env.CONFIRMATION == 'yes') {
+                            dockerLogin()
+                            pushImage 'simpleapp'
+                            /* sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         sh 'docker push medch1/simpleapp ' */
-                    } else {
-                        echo "you chose ${CONFIRMATION}"
+                        } else {
+                            echo "you chose ${CONFIRMATION}"
+                        }
+
+
                     }
 
-
-
-
                 }
-
             }
-        }
 
-        /*stage('Snyk') {
+            /*stage('Snyk') {
             steps {
                 script{
                     gv.job('Scan')
@@ -77,7 +74,7 @@ pipeline {
             }
         }*/
 
-        /*
+            /*
         stage('commit update'){
             steps{
                 script{
@@ -112,5 +109,6 @@ pipeline {
             }
         }
         */
+        }
     }
 }
