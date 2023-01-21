@@ -19,9 +19,9 @@ pipeline {
         }
         stage('Init') {
             steps {
-                /*script{
+                script{
                     gv = load "script.groovy"
-                }*/
+
             }
         }
         stage('Build image') {
@@ -29,8 +29,8 @@ pipeline {
                 script{
                     buildImage 'simpleapp'
 
-                    /* gv.job('Build')
-                    app = docker.build("medch1/simpleapp", " .") */
+                     gv.job('Build')
+                    app = docker.build("medch1/simpleapp", " .")
                 }
             }
         }
