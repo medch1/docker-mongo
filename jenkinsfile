@@ -33,7 +33,8 @@ pipeline {
         stage ("snyk test"){
             steps  {
                 //sh 'snyk container test medch1/simpleapp --file=Dockerfile'
-                def variable = sh(script:'snyk container test medch1/simpleapp --severity-threshold=critical', returnStatus: true)
+
+                 sh 'snyk container test medch1/simpleapp --severity-threshold=critical'
             }
         }
     }
