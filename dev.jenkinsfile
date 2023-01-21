@@ -1,4 +1,4 @@
-@Library('jenkins-shared-library')
+//@Library('jenkins-shared-library')
 def app
 def gv
 pipeline {
@@ -19,9 +19,9 @@ pipeline {
         }
         stage('Init') {
             steps {
-                script{
+                /*script{
                     gv = load "script.groovy"
-                }
+                }*/
             }
         }
         stage('Build image') {
@@ -59,7 +59,7 @@ pipeline {
             }
         }
 
-        stage('Snyk') {
+        /*stage('Snyk') {
             steps {
                 script{
                     gv.job('Scan')
@@ -75,8 +75,9 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
+        /*
         stage('commit update'){
             steps{
                 script{
@@ -110,6 +111,6 @@ pipeline {
                 }
             }
         }
-
+        */
     }
 }
