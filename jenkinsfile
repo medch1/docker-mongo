@@ -33,7 +33,7 @@ pipeline {
         }
         stage ("Notify Discord"){
             steps  {
-                discordSend description: env.JOB_NAME +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: $DISCORD_WEBHOOK
+                discordSend description: env.JOB_NAME +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: DISCORD_WEBHOOK
 
             }
         }
