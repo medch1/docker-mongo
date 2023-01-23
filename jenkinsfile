@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+        DISCORD_WEBHOOK = credentials('DISCORD_WEBHOOK')
     }
     stages {
         stage ("Build") {
@@ -32,8 +33,7 @@ pipeline {
         }
         stage ("Notify Discord"){
             steps  {
-                //sh 'snyk container test medch1/simpleapp --file=Dockerfile'
-                discordSend description: env.JOB_NAME +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: 'https://discord.com/api/webhooks/1067038928391110707/JjT7HUtmLFT2aaHLj65ZUR2FjkKVj3xeZWe2eEzYEVEqFEeL4ebPGlzbQDg2NNGMifep'
+                discordSend description: env.JOB_NAME +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: $DISCORD_WEBHOOK
 
             }
         }
