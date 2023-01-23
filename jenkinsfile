@@ -17,7 +17,7 @@ pipeline {
         stage ("Build") {
             steps {
                 script{
-                    gv.job("Test")
+                    gv.job("Build")
                     }
                 }
         }
@@ -31,14 +31,14 @@ pipeline {
         stage ("Deploy") {
             steps {
                 script{
-                   gv.job("Test")
+                   gv.job("Deploy")
                         }
             }
         }
         stage ("Build docker image"){
             steps {
                 script{
-                    gv.job("Test")
+                    gv.job("Dockeriz")
                     sh 'docker build -t medch1/simpleapp .'
                         }
 
