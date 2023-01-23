@@ -14,30 +14,41 @@ pipeline {
 
         stage ("Build") {
             steps {
-                gv.job("Build")
+                script{
+                    gv.job("Test")
+                    }
                 }
         }
         stage ("Test") {
             steps {
-                gv.job("Test")
+                script{
+                    gv.job("Test")
+                }
             }
         }
         stage ("Deploy") {
             steps {
-                gv.job("Deploy")
+                script{
+                   gv.job("Test")
+                        }
             }
         }
         stage ("Build docker image"){
             steps {
-                gv.job("Dockeriz ")
-                sh 'docker build -t medch1/simpleapp .'
+                script{
+                    gv.job("Test")
+                    sh 'docker build -t medch1/simpleapp .'
+                        }
+
             }
         }
         stage ("Push Docker image"){
             steps {
-                gv.job("Push ")
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'docker push medch1/simpleapp '
+                script{
+                    gv.job("Push ")
+				    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                    sh 'docker push medch1/simpleapp '
+                }
             }
         }
         stage ("Notify Discord"){
