@@ -1,3 +1,4 @@
+def gv
 pipeline {
     agent any
     environment {
@@ -5,28 +6,36 @@ pipeline {
         DISCORD_WEBHOOK = credentials('DISCORD_WEBHOOK')
     }
     stages {
+        stage ("Init") {
+            steps {
+                gv = load "script.groovy"
+            }
+        }
+
         stage ("Build") {
             steps {
-                echo 'Starting Build ...'
+                gv.job("Build")
                 }
         }
         stage ("Test") {
             steps {
-                echo 'Starting Test ...'
+                gv.job("Test")
             }
         }
         stage ("Deploy") {
             steps {
-                echo 'Starting Deploy ...'
+                gv.job("Deploy")
             }
         }
         stage ("Build docker image"){
             steps {
-                 sh 'docker build -t medch1/simpleapp .'
+                gv.job("Dockeriz ")
+                sh 'docker build -t medch1/simpleapp .'
             }
         }
         stage ("Push Docker image"){
             steps {
+                gv.job("Push ")
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker push medch1/simpleapp '
             }
