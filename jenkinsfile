@@ -47,7 +47,7 @@ pipeline {
         stage ("Push Docker image"){
             steps {
                 script{
-                    gv.job("Push ")
+                    gv.job("Push")
 				    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     sh 'docker push medch1/simpleapp '
                 }
@@ -62,9 +62,5 @@ pipeline {
     }
 }
 
+//adding webhookRelay to try trigger
 
-
-
-//checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitHub', url: 'https://github.com/medch1/docker-mongo.git']]])
-
-//snykSecurity severity: 'critical', snykInstallation: 'Snyk', snykTokenId: 'snyk_cred'
