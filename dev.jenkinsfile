@@ -34,6 +34,27 @@ pipeline {
                     }
                 }
             }
+            
+            
+            
+            stage('Snyk') {
+            steps {
+                script{
+                    gv.job('Scan')
+                    withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
+                        sh 'snyk auth $SNYK_TOKEN'
+
+                    }
+                    def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
+                    echo "error code = ${variable}"
+                    if (variable != 0) {
+                     discordSend description: '', footer: '', image: '', link: '', result: '', scmWebUrl: '', thumbnail: '', title: 'Jenkins', webhookURL: 'https://discord.com/api/webhooks/1067068756049801286/gJluS5Fa5klo_mT2hLL6nkZyW8NpYW1SsJfCu1bMd7_02eq2-_pam2KelcOhnLAZpHpf'
+
+                    }
+                }
+            }
+        }
+            
             stage('Push image') {
 
                 steps {
@@ -56,22 +77,6 @@ pipeline {
                 }
             }
 
-            /*stage('Snyk') {
-            steps {
-                script{
-                    gv.job('Scan')
-                    withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
-                        sh 'snyk auth $SNYK_TOKEN'
-
-                    }
-                    def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
-                    echo "error code = ${variable}"
-                    if (variable != 0) {
-
-                    }
-                }
-            }
-        }*/
 
             /*
         stage('commit update'){
