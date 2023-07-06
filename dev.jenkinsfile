@@ -67,13 +67,27 @@ pipeline {
         stage('Push image') {
             steps {
                 script {
-                    if (variable == 0) {
+                    if (variable != 0) {
+                        error "Snyk scan found vulnerabilities. Build stopped."
+                    } else {
                         dockerLogin()
                         pushImage 'simpleapp'
                     }
                 }
             }
         }
+
+
+        /* stage('Push image') {
+             steps {
+                 script {
+                     if (variable == 0) {
+                         dockerLogin()
+                         pushImage 'simpleapp'
+                     }
+                 }
+             }
+         }*/
 
 
     }
