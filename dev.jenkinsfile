@@ -1,6 +1,7 @@
 //@Library('jenkins-shared-library')
 def app
 def gv
+def variable
 
 pipeline {
     agent any
@@ -43,7 +44,7 @@ pipeline {
                         sh "snyk auth $SNYK_TOKEN"
                     }
 
-                    def variable = sh(script: 'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
+                    variable = sh(script: 'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
                     echo "error code = ${variable}"
 
                     if (variable != 0) {
