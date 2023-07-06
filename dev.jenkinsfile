@@ -1,115 +1,69 @@
 //@Library('jenkins-shared-library')
 def app
 def gv
+
 pipeline {
     agent any
+
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker_hub')
         GITHUB_CREDENTIALS = credentials('github-token')
-
-        //using trigger to build pipeline.
     }
+
     stages {
         stage('Clone repository') {
             steps {
-
                 checkout scm
-
             }
         }
+
         stage('Init') {
             steps {
                 script {
                     gv = load "script.groovy"
-
-                }
-            }
-            stage('Build image') {
-                steps {
-                    script {
-                        buildImage 'simpleapp'
-
-                        gv.job('Build')
-                        app = docker.build("medch1/simpleapp", " .")
-                    }
-                }
-            }
-
-
-            stage('Snyk') {
-                steps {
-                    script{
-                        gv.job('Scan')
-                        withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
-                            sh 'snyk auth $SNYK_TOKEN'
-
-                        }
-                        def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
-                        echo "error code = ${variable}"
-                        if (variable != 0) {
-                            //   discordSend description: currentBuild.currentResult +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: env.JOB_NAME , webhookURL: DISCORD_WEBHOOK
-
-                            discordSend description: env.JOB_NAME +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: 'https://discord.com/api/webhooks/1067068756049801286/gJluS5Fa5klo_mT2hLL6nkZyW8NpYW1SsJfCu1bMd7_02eq2-_pam2KelcOhnLAZpHpf'
-                        }
-                    }
-                }
-            }
-
-            stage('Push image') {
-
-                steps {
-                    script {
-                        // env.CONFIRMATION = input message: "Confirm pushing image ?", ok: "done", parameters: [choice(name: 'CONFIRMATION', choices: ['yes', 'no'], description: '')]
-
-
-                        if (variable == 0) {
-                            dockerLogin()
-                            pushImage 'simpleapp'
-                            /* sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                        sh 'docker push medch1/simpleapp ' */
-                        }
-
-
-                    }
-
-                }
-            }
-
-            /*
-        stage('commit update'){
-            steps{
-                script{
-
-
-                     withCredentials([string(credentialsId: 'github-token', variable: 'github-token')]) {
-                                sh 'git config --global user.email "jenkins@example.com" '
-                                sh 'git config --global user.name "jenkins" '
-
-
-                                sh 'git status'
-                                sh 'git branch'
-
-
-                                withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
-                                        sh 'git remote set-url origin https://$TOKEN@github.com/medch1/docker-mongo.git'
-                                        sh 'git add .'
-                                        sh 'git commit -m "ci:version bump" '
-                                        sh 'git push origin HEAD:main'
-
-                                    }
-                              //  sh "git remote set-url origin https://${GITHUB_CREDENTIALS_USR}:${GITHUB_CREDENTIALS_PSW}@github.com/medch1/docker-mongo.git "
-                              //  sh 'git remote set-url origin https://$GITHUB_CREDENTIALS_USR:$GITHUB_CREDENTIALS_PSW@github.com/medch1/docker-mongo.git '
-
-
-
-
-
-                                }
-
                 }
             }
         }
-        */
+
+        stage('Build image') {
+            steps {
+                script {
+                    buildImage 'simpleapp'
+                    gv.job('Build')
+                    app = docker.build("medch1/simpleapp", ".")
+                }
+            }
         }
+
+        stage('Snyk') {
+            steps {
+                script {
+                    gv.job('Scan')
+                    withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
+                        sh "snyk auth $SNYK_TOKEN"
+                    }
+
+                    def variable = sh(script: 'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
+                    echo "error code = ${variable}"
+
+                    if (variable != 0) {
+                        discordSend description: env.JOB_NAME + " \n Build: " + env.BUILD_NUMBER, footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: 'https://discord.com/api/webhooks/1067068756049801286/gJluS5Fa5klo_mT2hLL6nkZyW8NpYW1SsJfCu1bMd7_02eq2-_pam2KelcOhnLAZpHpf'
+                    }
+                }
+            }
+        }
+
+        stage('Push image') {
+            steps {
+                script {
+                    if (variable == 0) {
+                        dockerLogin()
+                        pushImage 'simpleapp'
+                    }
+                }
+            }
+        }
+
+
     }
 }
