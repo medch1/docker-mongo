@@ -28,7 +28,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    buildImage 'simpleapp'
+                    //buildImage 'simpleapp'
                     gv.job('Build')
                     app = docker.build("medch1/simpleapp", ".")
                 }
