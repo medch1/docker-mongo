@@ -34,41 +34,39 @@ pipeline {
                     }
                 }
             }
-            
-            
-            
+
+
             stage('Snyk') {
-            steps {
-                script{
-                    gv.job('Scan')
-                    withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
-                        sh 'snyk auth $SNYK_TOKEN'
+                steps {
+                    script{
+                        gv.job('Scan')
+                        withCredentials([string(credentialsId: 'snyk_token_secret', variable: 'SNYK_TOKEN')]) {
+                            sh 'snyk auth $SNYK_TOKEN'
 
-                    }
-                    def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
-                    echo "error code = ${variable}"
-                    if (variable != 0) {
-                     discordSend description: '', footer: '', image: '', link: '', result: '', scmWebUrl: '', thumbnail: '', title: 'Jenkins', webhookURL: 'https://discord.com/api/webhooks/1067068756049801286/gJluS5Fa5klo_mT2hLL6nkZyW8NpYW1SsJfCu1bMd7_02eq2-_pam2KelcOhnLAZpHpf'
+                        }
+                        def variable = sh(script:'snyk container test registry.hub.docker.com/medch1/simpleapp --severity-threshold=critical --json > report.json', returnStatus: true)
+                        echo "error code = ${variable}"
+                        if (variable != 0) {
+                            //   discordSend description: currentBuild.currentResult +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: env.JOB_NAME , webhookURL: DISCORD_WEBHOOK
 
+                            discordSend description: env.JOB_NAME +" \n Build: " +env.BUILD_NUMBER +"" , footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'Jenkins Job Update ', webhookURL: 'https://discord.com/api/webhooks/1067068756049801286/gJluS5Fa5klo_mT2hLL6nkZyW8NpYW1SsJfCu1bMd7_02eq2-_pam2KelcOhnLAZpHpf'
+                        }
                     }
                 }
             }
-        }
-            
+
             stage('Push image') {
 
                 steps {
                     script {
-                        env.CONFIRMATION = input message: "Confirm pushing image ?", ok: "done", parameters: [choice(name: 'CONFIRMATION', choices: ['yes', 'no'], description: '')]
+                        // env.CONFIRMATION = input message: "Confirm pushing image ?", ok: "done", parameters: [choice(name: 'CONFIRMATION', choices: ['yes', 'no'], description: '')]
 
 
-                        if (env.CONFIRMATION == 'yes') {
+                        if (variable == 0) {
                             dockerLogin()
                             pushImage 'simpleapp'
                             /* sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         sh 'docker push medch1/simpleapp ' */
-                        } else {
-                            echo "you chose ${CONFIRMATION}"
                         }
 
 
@@ -76,7 +74,6 @@ pipeline {
 
                 }
             }
-
 
             /*
         stage('commit update'){
