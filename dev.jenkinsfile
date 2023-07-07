@@ -89,9 +89,16 @@ pipeline {
             }
             steps {
                 script {
-                    // Run the deployment commands here
-                    sh 'docker run -d -p 8080:80 medch1/simpleapp'
-                }
+                    // Pull the Docker image from the registry
+                    sh 'docker pull medch1/simpleapp'
+
+                    // Stop and remove any existing container with the same name
+                    sh 'docker stop simpleapp || true'
+                    sh 'docker rm simpleapp || true'
+
+                    // Run the Docker container
+                    sh 'docker run -d -p 8081:80 --name simpleapp medch1/simpleapp'
+                     }
             }
         }
 
