@@ -2,6 +2,8 @@
 def app
 def gv
 def variable
+def pushSuccess
+def pushResult
 
 pipeline {
     agent any
@@ -67,28 +69,31 @@ pipeline {
         stage('Push image') {
             steps {
                 script {
-                    if (variable != 0) {
-                        error "Snyk scan found vulnerabilities. Build stopped."
-                    } else {
-                        dockerLogin()
-                        pushImage 'simpleapp'
+                     pushSuccess = false  // Initialize a variable to track push success
+                    if (variable == 0) {
+                        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                         pushResult = sh(returnStatus: true, script: 'docker push medch1/simpleapp')
+                        pushSuccess = pushResult == 0  // Update pushSuccess based on the push result
                     }
+                    // Pass pushSuccess variable to the next stage
+                    env.PUSH_SUCCESS = pushSuccess.toString()
                 }
             }
         }
 
-
-
-        /* stage('Push image') {
-             steps {
-                 script {
-                     if (variable == 0) {
-                         dockerLogin()
-                         pushImage 'simpleapp'
-                     }
-                 }
-             }
-         }*/
+        stage('Deploy') {
+            when {
+                expression {
+                    return env.PUSH_SUCCESS == 'true'  // Run the deploy stage only if pushSuccess is true
+                }
+            }
+            steps {
+                script {
+                    // Run the deployment commands here
+                    sh 'docker run -d -p 8080:80 medch1/simpleapp'
+                }
+            }
+        }
 
 
     }
