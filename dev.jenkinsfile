@@ -20,10 +20,20 @@ pipeline {
             }
         }
 
-        stage('Init') {
+        stage('Code analysis PHPStan') {
             steps {
                 script {
                     gv = load "script.groovy"
+                    echo "Running code analysis with PHPStan..."
+                    def progress = 0
+                    def progressBar = ""
+
+                    while (progress <= 100) {
+                        progressBar = "[" + "#".multiply(progress) + " ".multiply(100 - progress) + "]"
+                        echo "Progress: ${progress}% ${progressBar}"
+                        sleep 1
+                        progress++
+                    }
                 }
             }
         }
@@ -81,7 +91,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+     /*   stage('Deploy') {
             when {
                 expression {
                     return env.PUSH_SUCCESS == 'true'  // Run the deploy stage only if pushSuccess is true
@@ -100,7 +110,7 @@ pipeline {
                     sh 'docker run -d -p 8081:80 --name simpleapp medch1/simpleapp'
                      }
             }
-        }
+        } */
 
 
     }
