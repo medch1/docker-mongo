@@ -64,8 +64,7 @@ pipeline {
 
                         def message = "Snyk scan found vulnerabilities in ${env.JOB_NAME}\n" +
                                 "Build: ${env.BUILD_NUMBER}\n" +
-                                "Result: ${variable != 0 ? 'FAILURE' : currentBuild.currentResult}\n" +
-                                "Build URL: ${env.BUILD_URL}"
+                                "Result: ${variable != 0 ? 'FAILURE' : currentBuild.currentResult}\n"
 
 
                         //  discordSend description: message, footer: '', image: '', link: env.BUILD_URL, result: currentBuild.currentResult, scmWebUrl: '', thumbnail: '', title: 'vulnerability found at your docker image', webhookURL: 'https://discord.com/api/webhooks/1067068756049801286/gJluS5Fa5klo_mT2hLL6nkZyW8NpYW1SsJfCu1bMd7_02eq2-_pam2KelcOhnLAZpHpf'
